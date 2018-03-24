@@ -9,4 +9,14 @@ storiesOf("DigitalClock", module)
   .add("basic", () => {
     const time = new Date("2018-03-17T12:34:56+0800");
     return <DigitalClock time={time} />;
+  })
+
+  .add("single-digit hour", () => {
+    const time = new Date("2018-03-17T02:34:56+0800");
+    return <DigitalClock time={time} />;
+  })
+
+  .add("single-digit minute", () => {
+    const time = new Date("2018-03-17T12:04:56+0800");
+    return <DigitalClock time={time} />;
   });

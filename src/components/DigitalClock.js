@@ -41,28 +41,38 @@ const DigitalClock = props => {
   const digitWidth = width / 4.7;
   const colonWidth = digitWidth / 2;
   const spacing = digitWidth / 10;
+  let h1, h2, m1, m2;
 
-  if (!time) {
-    return (
-      <svg {...rest}>
-        <DigitalDigit height={height} />
-        <DigitalDigit height={height} x={digitWidth + spacing} />
-        <DigitalColon
-          height={height}
-          x={2 * digitWidth + spacing}
-          isOn={true}
-        />
-        <DigitalDigit
-          height={height}
-          x={2 * digitWidth + spacing + colonWidth}
-        />
-        <DigitalDigit
-          height={height}
-          x={3 * digitWidth + 2 * spacing + colonWidth}
-        />
-      </svg>
-    );
+  if (time) {
+    const hh = time.getHours();
+    const mm = time.getMinutes();
+    h1 = parseInt(hh / 10) || undefined; // Don't show leading zero for hours
+    h2 = hh % 10;
+    m1 = parseInt(mm / 10);
+    m2 = mm % 10;
   }
+
+  return (
+    <svg {...rest}>
+      <DigitalDigit height={height} digit={h1} />
+      <DigitalDigit height={height} x={digitWidth + spacing} digit={h2} />
+      <DigitalColon
+        height={height}
+        x={2 * digitWidth + spacing}
+        isOn={!!time}
+      />
+      <DigitalDigit
+        height={height}
+        x={2 * digitWidth + spacing + colonWidth}
+        digit={m1}
+      />
+      <DigitalDigit
+        height={height}
+        x={3 * digitWidth + 2 * spacing + colonWidth}
+        digit={m2}
+      />
+    </svg>
+  );
 };
 
 DigitalClock.propTypes = {
