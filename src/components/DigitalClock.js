@@ -41,7 +41,11 @@ const DigitalClock = props => {
   const digitWidth = width / 4.7;
   const colonWidth = digitWidth / 2;
   const spacing = digitWidth / 10;
-  let h1, h2, m1, m2;
+  let h1,
+    h2,
+    m1,
+    m2,
+    isColonOn = false;
 
   if (time) {
     const hh = time.getHours();
@@ -50,6 +54,8 @@ const DigitalClock = props => {
     h2 = hh % 10;
     m1 = parseInt(mm / 10);
     m2 = mm % 10;
+    console.log(time.getMilliseconds());
+    isColonOn = time.getSeconds() % 2 === 0;
   }
 
   return (
@@ -59,7 +65,7 @@ const DigitalClock = props => {
       <DigitalColon
         height={height}
         x={2 * digitWidth + spacing}
-        isOn={!!time}
+        isOn={isColonOn}
       />
       <DigitalDigit
         height={height}
