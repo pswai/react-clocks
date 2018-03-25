@@ -6,9 +6,15 @@ import withTimeNow from "../hoc/withTimeNow";
 
 storiesOf("DigitalClock", module)
   .add("empty", () => <DigitalClock />)
+
   .add("basic", () => {
     const time = new Date("2018-03-17T12:34:56+0800");
     return <DigitalClock time={time} />;
+  })
+
+  .add("show seconds", () => {
+    const time = new Date("2018-03-17T12:34:56+0800");
+    return <DigitalClock time={time} showSeconds={true} />;
   })
 
   .add("single-digit hour", () => {
@@ -21,7 +27,17 @@ storiesOf("DigitalClock", module)
     return <DigitalClock time={time} />;
   })
 
-  .add("withTimeNow HOC", () => {
-    const MovingDigitalClock = withTimeNow(DigitalClock);
+  .add("single-digit second", () => {
+    const time = new Date("2018-03-17T12:34:06+0800");
+    return <DigitalClock time={time} showSeconds={true} />;
+  })
+
+  .add("ticking", () => {
+    const MovingDigitalClock = withTimeNow()(DigitalClock);
     return <MovingDigitalClock />;
+  })
+
+  .add("ticking with seconds", () => {
+    const MovingDigitalClock = withTimeNow()(DigitalClock);
+    return <MovingDigitalClock showSeconds={true} />;
   });

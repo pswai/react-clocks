@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const withTimeNow = WrappedComponent =>
+const withTimeNow = (interval = 500) => WrappedComponent =>
   class TimeProvider extends Component {
     constructor(props) {
       super(props);
@@ -15,7 +15,7 @@ const withTimeNow = WrappedComponent =>
     }
 
     getTimeToNextTick(date) {
-      return 1000 - date.getMilliseconds();
+      return interval - date.getMilliseconds() % interval;
     }
 
     scheduleTick() {
